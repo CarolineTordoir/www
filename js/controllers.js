@@ -98,6 +98,7 @@ angular.module('starter.controllers', ['ngStorage', 'ionic', 'pascalprecht.trans
    $scope.resetpass = function() {
 
 $state.go('side.forgotpw');
+
    }
         $scope.login = function() {
              $ionicLoading.show({
@@ -153,10 +154,12 @@ $state.go('side.forgotpw');
 		}
     });
     })
+	
 .controller('ForogotPassCtrl', function($scope, apiUrl, $state, $http, $stateParams, $timeout, $cordovaDevice, $ionicLoading, $ionicPopup, $localStorage, $translate) {
  var phone = $localStorage.phone;
  $scope.curlang = $translate.use($localStorage.lang);
   $translate(['emailerror', 'error','tryagain']).then(function(translations) {
+	  
  $scope.resetpassword = function(email) {
     $ionicLoading.show({
         template: 'Validating.....',
@@ -197,7 +200,10 @@ $state.go('side.forgotpw');
                 }else{
 
             $ionicLoading.hide();
-                    $state.reload(); 
+			$localStorage.tempid = data.tempid;
+			$state.go('side.validatetoken');
+			
+            //        $state.reload(); 
                 }
 
                    
@@ -212,6 +218,87 @@ $state.go('side.forgotpw');
 });
 })
 
+.controller('validatetokenCtrl', function($scope, apiUrl, $state, $http, $stateParams, $timeout, $cordovaDevice, $ionicLoading, $ionicPopup, $localStorage, $translate) {
+ var userid = $localStorage.tempid;
+ console.log(userid);
+ $scope.curlang = $translate.use($localStorage.lang);
+   $translate(['error101', 'error102', 'error']).then(function(translations) {
+ $scope.verifytoken = function(user) {
+	 if(device.uuid == null){
+
+                var uuid = "browser"+device.version;
+            }else{
+
+
+                var uuid = device.uuid;
+            }
+            var name = device.platform;
+            var version =device.version;
+			
+			
+    $ionicLoading.show({
+        template: 'Validating.....',
+        duration: 6000,
+        noBackdrop: true
+    });
+
+        var link = apiUrl+'changepass';
+        $.ajax({
+            type: "POST",
+            url: link,
+            dataType: "json",
+            data: {
+                userid: userid,
+				token: user.token,
+				password1: user.password1,
+				password2: user.password2,
+				uuid: uuid,
+				name: name,
+				version: version
+            },
+            success: function(data) {
+			console.log(data);
+			if(data.result == "success"){
+			  $localStorage.token = data.token;
+            $localStorage.lang = data.lang;
+            $localStorage.userid = data.userid;
+			delete $localStorage.tempid;
+			delete $localStorage.billipass;
+			
+            $ionicLoading.hide(); 	
+			$state.go('side.dash'); 	
+			}else{
+			
+			if(data.error_code == "101"){
+				var err = translations.error101;
+				
+			}else if(data.error_code == "102"){
+				
+				var err = translations.error102;
+				
+			}
+			 $ionicLoading.hide();   
+                alert(translations.error+': '+err);
+				
+				
+			}
+          
+			
+            $state.reload();        
+            },
+            error: function(e) {
+                $ionicLoading.hide();   
+                alert('Error: Please close the app and reopen');
+            }
+        });
+
+}
+
+ 
+   });
+ 
+ 
+})
 
 .controller('SmsConfirmCtrl', function($scope, apiUrl, $state, $http, $stateParams, $cordovaDevice, $ionicLoading, $localStorage, $translate) {
  var phone = $localStorage.phone;

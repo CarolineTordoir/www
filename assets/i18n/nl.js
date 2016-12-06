@@ -109,8 +109,14 @@ var translations_nl = {
 		"validatebutton":"Telefoonnummer verifiëren",
 		"confirmhelp":"Geef de code in die naar het aangegeven telefoonnummer werd verzonden",
 		"entercode":"Verificatie-code ingeven (4 cijfers)",
-			"resetpass":"Paswoord resetten",
+		"resetpass":"Paswoord resetten",
 		"enteremail":"Geef uw emailadres in en klik op Paswoord verzenden",
 		"sendpassword":"Paswoord verzenden",
 		"emailerror":"Dit emailadres is niet geldig of wordt niet herkend",
+		"newpassword":"Enter new password",
+		"confirmpassword":"Confirm new password",
+		"changepasswordandlogin":"Change Pass and Login",
+		"entercodeandlogin":"Please enter code that send to your email and change your password above",
+		"error101":"Your new password and the confirmation did not match",
+		"error102":"Your access code is not correct please check your mailbox or junkmail"
 }

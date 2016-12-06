@@ -20,7 +20,7 @@ angular.module('starter.services', [])
             var phone = login.phone;
             return $http.get("https://api.billi.be/mobile/login/?login=" + login.username + "&pass=" + login.password + "&uuid=" + uuid +"&version=" + version+ "&name=" + name+'&phone='+phone);
         },
-        submiticket: function(submiticket) {
+		submiticket: function(submiticket) {
             var link = "https://api.billi.be/mobile/submitticket";
             $.ajax({
                 type: "POST",

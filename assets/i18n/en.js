@@ -114,7 +114,11 @@ var translations_en = {
 		"enteremail":"Please enter your email address and click Send my password",
 		"sendpassword":"Send my password",
 		"emailerror":"This email is not valid or not recognized by our system",
-
-
+		"newpassword":"Enter new password",
+		"confirmpassword":"Confirm new password",
+		"changepasswordandlogin":"Change Pass and Login",
+		"entercodeandlogin":"Please enter code that send to your email and change your password above",
+		"error101":"Your new password and the confirmation did not match",
+		"error102":"Your access code is not correct please check your mailbox or junkmail"
 
 	}

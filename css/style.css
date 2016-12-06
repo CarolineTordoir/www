@@ -54,7 +54,11 @@ p {
     text-align:center;
     color: #fff;
 }
-.ka
+.tengah-kurus-hitam {
+    text-align:center;
+    color: #111;
+}
+
 .kanan-kurus {
     text-align:right;
 }

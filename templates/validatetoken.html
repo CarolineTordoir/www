@@ -1,0 +1,37 @@
+<ion-view id="login" hide-nav-bar="true">
+    <ion-content padding="true" scroll="false">
+        <form>
+            <div class="row responsive-md">
+                <div class="col col-50 col-offset-25">
+
+                    <div class="header padding text-center">
+                        <img src="img/logo.png" alt="BILLI"/>
+                    </div>
+
+                    <div class="list">               
+                         <label class="item item-input">
+                            <input ng-model="user.token" type="number" placeholder="Access Code ex: 123456">
+                        </label>
+                    </div>
+					  <div class="list">               
+                         <label class="item item-input">
+                            <input ng-model="user.password1" type="text" placeholder="{{'newpassword' | translate}}">
+                        </label>
+                    </div>
+
+					  <div class="list">               
+                         <label class="item item-input">
+                            <input ng-model="user.password2" type="text" placeholder="{{'confirmpassword' | translate}}">
+                        </label>
+                    </div>
+
+                    <button class="button button-block button-simson" ng-click="verifytoken(user);">
+                     <i class="icon ion-locked"></i>  {{"changepasswordandlogin" | translate}}
+                    </button>   
+                    <p class="tengah-kurus-hitam">{{'entercodeandlogin' | translate}}</p>                   
+               
+                </div>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>
