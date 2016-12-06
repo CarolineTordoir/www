@@ -1,0 +1,13 @@
+    <ion-view view-title="Block My Number">     
+    <ion-content>
+  
+    <center><h2>Are you sure do you want to Block this Number +{{number}}</h2></center>
+     <ion-item>
+
+     <label class="item item-input">
+    <textarea ng-model="block.reason" placeholder="Please enter the reason for blocking"></textarea>
+  	</label>
+	<button class="button button-block button-simson" ng-click="block(block.reason);">Yes I am Sure!</button>
+</ion-item>
+    </ion-content>
+    </ion-view>

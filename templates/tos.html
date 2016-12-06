@@ -1,0 +1,12 @@
+<ion-view view-title="{{'tos' | translate}}">
+  <ion-content>
+
+<div class="row">
+ <div class="col"><button class="button button-block button-simson" ng-click="prevPage()">&lt;</button></div>
+ <div class="col"><button class="button button-block button-simson" ng-click="nextPage()">&gt;</button></div>
+</div>
+
+<pdfviewer src="assets/nl.pdf" on-page-load='pageLoaded(page,total)' id="viewer"></pdfviewer>
+
+  </ion-content>
+  </ion-view>

@@ -1,0 +1,57 @@
+<ion-side-menus enable-menu-with-back-views="false">
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-simson">
+      <ion-nav-back-button class="button-simson">
+    <i class="icon ion-android-arrow-back"></i>
+  </ion-nav-back-button>
+
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-simson ion-navicon" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>
+      <ion-nav-buttons side="right">
+       <img src="img/logo-small.png" height="30">
+    </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left">
+    <ion-header-bar class="bar-simson">
+      <img src="img/logonav.png" height="35">
+    </ion-header-bar>
+    <ion-content>
+      <ion-list>
+         <ion-item menu-close href="#/side/dash">
+         <img src="img/icons/browser.png" width="20"> {{"dashboard" | translate}}
+        </ion-item>
+        <ion-item menu-close href="#/side/internet">
+         <img src="img/icons/internet.png" width="20"> {{"myinternet" | translate}}
+        </ion-item>
+        <ion-item menu-close href="#/side/mobile">
+         <img src="img/icons/smartphone.png" width="20"> {{"mymobile" | translate}}
+        </ion-item>
+        <ion-item menu-close href="#/side/tv">
+         <img src="img/icons/computer.png" width="20"> {{"mytv" | translate}}
+        </ion-item>
+          <ion-item menu-close href="#/side/invoices">
+          <img src="img/icons/document-3.png" width="20"> {{"myinvoices" | translate}}
+        </ion-item>
+           <ion-item menu-close href="#/side/tickets">
+          <img src="img/icons/document-1.png" width="20"> {{"ticketsupport" | translate}}
+        </ion-item>
+          <ion-item menu-close href="#/side/contact">
+          <img src="img/icons/document-2.png" width="20"> {{"contacts" | translate}}
+        </ion-item>
+
+         <!-- <ion-item menu-close href="#/logout">
+         <img src="img/icons/unlock.png" width="20"> {{"logout" | translate}}
+        </ion-item> -->
+            <ion-item menu-close>
+        <h6>MyBILLI v.0.9.1 BETA</h6>
+
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

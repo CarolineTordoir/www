@@ -1,0 +1,33 @@
+    <ion-view view-title="Current Usage">     
+    <ion-content>
+	<div class="row">
+	<div class="col">
+	</div>
+	<div class="col">
+	<percent-circle percent="usg.local/total*100" colors="{center:'#fff', highlight:'#a7f442', remaining:'#7b15bf'}"></percent-circle>
+	
+	</div>
+	<div class="col">
+	</div>
+	</div>
+	
+	<p class="tengah">{{usg.local}} minutes used for local call </p>
+	
+	<div class="row">
+	<div class="col">
+	</div>
+	<div class="col">
+	<percent-circle percent="usg.int/total/100" colors="{center:'#fff', highlight:'#a7f442', remaining:'#aebf15'}"></percent-circle>
+	
+	</div>
+	<div class="col">
+	</div>
+	
+	</div>
+	
+	<p class="tengah">{{usg.int}} minutes used for international call</p> 
+
+	
+   
+    </ion-content>
+    </ion-view>

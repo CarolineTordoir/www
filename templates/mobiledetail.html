@@ -1,0 +1,46 @@
+    <ion-view view-title="{{'detailservice' | translate}}" align-title="center">     
+    <ion-content>
+      <div id="ServiceDetail"></div>
+      <div id="addons"></div>
+      <div class="card list">
+      <div class="item item-divider">{{"configuration" | translate}}</div>
+      <div class="item item-text-wrap">
+        <ion-toggle ng-model="pushNotification_web.checked"
+                    ng-change="pushNotificationChange(pushNotification_web.id+':'+pushNotification_web.checked)">
+          WEB
+        </ion-toggle>
+         <ion-toggle ng-model="pushNotification_lte.checked"
+                    ng-change="pushNotificationChange(pushNotification_lte.id+':'+pushNotification_lte.checked)">
+          LTE
+        </ion-toggle>
+         <ion-toggle ng-model="pushNotification_mms.checked"
+                    ng-change="pushNotificationChange(pushNotification_mms.id+':'+pushNotification_mms.checked)">
+          MMS
+        </ion-toggle>
+         <ion-toggle ng-model="pushNotification_roaming.checked"
+                    ng-change="pushNotificationChange(pushNotification_roaming.id+':'+pushNotification_roaming.checked)">
+          ROAMING
+        </ion-toggle>
+         <ion-toggle ng-model="pushNotification_international.checked"
+                    ng-change="pushNotificationChange(pushNotification_international.id+':'+pushNotification_international.checked)">
+          INTERNATIONAL
+        </ion-toggle>
+         <ion-toggle ng-model="pushNotification_premium.checked"
+                    ng-change="pushNotificationChange(pushNotification_premium.id+':'+pushNotification_premium.checked)">
+          PREMIUM
+        </ion-toggle>
+         </div>
+        </div>
+        <div class="row">
+  <div class="col">
+  <div ng-if="productstatus == 1">
+  <a class="button button-block button-assertive ion-minus" href="#/side/mobileblock/{{id}}"> {{"blocknumber" | translate}}</a></div>
+   <div ng-if="productstatus == 2">
+  <a class="button button-block button-assertive ion-minus" href="#/side/mobileunblock/{{id}}"> {{"unblocknumber" | translate}}</a></div>
+  </div>
+  <div class="col"><a class="button button-block button-balanced ion-clipboard" href="#/side/mobilecdr/{{id}}"> {{"usage" | translate}}</a></div>
+ 
+</div>
+
+    </ion-content>
+    </ion-view>

@@ -1,0 +1,34 @@
+<ion-view view-title="{{'newticketsupport' | translate}}">
+  <ion-content>
+<div class="list">
+   <label class="item item-input item-floating-label">
+   <span class="input-label">{{'ticketsubject' | translate}}</span>
+   <input type="text" ng-model="ticket.title" placeholder="{{'ticketsubject' | translate}}">
+   </label>
+   <label class = "item item-input item-select">
+   <div class = "input-label">
+      Department
+   </div>
+	
+	  <select ng-model="ticket.did">
+              <option value="">--- Select an option ---</option>
+              <option ng-selected= "{{value.id == defaultSelectedVAT}}" ng-repeat="value in data.dept" 
+                      value="{{value.id}}">{{value.name}}     
+              </option>
+             </select>
+	
+  
+</label>
+
+    <label class="item item-input item-floating-label">
+   <span class="input-label">{{'ticketmessage' | translate}}</span>
+   <textarea ng-model="ticket.message" rows="20"></textarea>
+   </label>
+</div>
+<div class="row">
+
+<button class="button button-block button-simson" ng-click="submiticket(ticket);">{{'submit' | translate}}</button>
+
+</div>
+  </ion-content>
+  </ion-view>

@@ -1,0 +1,45 @@
+    <ion-view view-title="Current Usage {{number}}">     
+    <ion-content>
+	<div class="row">
+	<div class="col">
+	</div>
+	<div class="col">
+	<percent-circle percent="pvoice" colors="{center:'#fff', highlight:'#a7f442', remaining:'#7b15bf'}"></percent-circle>
+	
+	</div>
+	<div class="col">
+	</div>
+	</div>
+	
+	<p class="tengah">{{val2}} minutes used from {{bundle.call/60}} minutes included</p>
+	
+	<div class="row">
+	<div class="col">
+	</div>
+	<div class="col">
+	<percent-circle percent="psms" colors="{center:'#fff', highlight:'#a7f442', remaining:'#aebf15'}"></percent-circle>
+	
+	</div>
+	<div class="col">
+	</div>
+	
+	</div>
+	
+	<p class="tengah">{{val1}} sms used from {{bundle.call/60}} sms included</p>
+
+	<div class="row">
+	<div class="col">
+	</div>
+	<div class="col">
+	<percent-circle percent="pinternet" colors="{center:'#fff', highlight:'#a7f442', remaining:'#1586bf'}"></percent-circle>
+	</div>
+	<div class="col">
+	</div>
+	</div>
+	
+	<p class="tengah">{{val3}} MB used from {{bundle.internet/1048576}} MB included</p>
+
+	
+   
+    </ion-content>
+    </ion-view>

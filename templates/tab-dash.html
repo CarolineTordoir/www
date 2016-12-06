@@ -1,0 +1,53 @@
+
+<ion-view id="login" view-title="Dashboard">
+<ion-content class="padding">
+<div class="card">
+                <div class="item item-text-wrap">
+               {{"welcome back" | translate}}<strong> {{data.client.firstname}}   {{data.client.lastname}}
+                </strong>
+                </div>
+                </div>
+                <div class="list">
+                <a class="item item-icon-left" href="#/side/internet">
+                <i class="icon ion-laptop"></i>
+                {{"internet" | translate}}
+                <span class="badge badge-positive"> {{data.stat.internet}} </span>
+                </a>
+                <a class="item item-icon-left" href="#/side/mobile">
+                <i class="icon ion-ipad"></i>
+                {{"mobile" | translate}}
+                <span class="badge badge-positive"> {{data.stat.mobile}} </span>
+                </a>
+                <a class="item item-icon-left" href="#/side/voip">
+                <i class="icon ion-android-call"></i>
+                {{"telephony" | translate}}
+                <span class="badge badge-positive"> {{data.stat.voip}} </span>
+                </a>
+                <a class="item item-icon-left" href="#/side/tickets">
+                <i class="icon ion-email-unread"></i>
+               {{"ticketsupport" | translate}}
+                <span class="badge badge-positive"> {{data.stat.ticket}} </span>
+                </a>
+				
+				        <a class="item item-icon-left" href="#/side/openticket">
+               <i class="icon ion-ios-plus"></i>
+               {{"newticketsupport" | translate}}
+               
+                </a>
+				
+				
+                <a class="item item-icon-left" href="#/side/invoices">
+                <i class="icon ion-cash"></i>
+                {{"openinvoice" | translate}}
+                <span class="badge badge-positive "> {{data.stat.invoice}} </span>
+                </a>
+				 <a class="item item-icon-left" href="#/side/tos">
+                <i class="icon ion-printer"></i>
+                {{"tos" | translate}}
+
+                </a>
+                </div>
+                <div id="pendingorder"></div>
+                
+  </ion-content>
+</ion-view>
