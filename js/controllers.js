@@ -312,7 +312,7 @@ $state.go('side.forgotpw');
         function onDeviceReady() {
             var push = PushNotification.init({
                 "android": {
-                    "senderID": "487662074432"
+                    "senderID": "124177596832"
                 }
             });
             var uuid =$cordovaDevice.getUUID();
