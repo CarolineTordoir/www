@@ -280,11 +280,11 @@ $state.go('side.forgotpw');
 			 $ionicLoading.hide();   
                 alert(translations.error+': '+err);
 				
-				
+			$state.reload();   	
 			}
           
 			
-            $state.reload();        
+                 
             },
             error: function(e) {
                 $ionicLoading.hide();   
