@@ -44,6 +44,19 @@
          url('../fonts/VAGRoundedBold.svg#VAGRoundedBold') format('svg');
 }
 
+@font-face {
+	font-family: 'VAGRounded';
+	src: url('../fonts/VAGRounded-Light.eot');
+	src: url('../fonts/VAGRounded-Light.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/VAGRounded-Light.woff2') format('woff2'),
+		url('../fonts/VAGRounded-Light.woff') format('woff'),
+		url('../fonts/VAGRounded-Light.ttf') format('truetype'),
+		url('../fonts/VAGRounded-Light.svg#VAGRounded-Light') format('svg');
+	font-weight: 300;
+	font-style: normal;
+}
+
+
 
 .ion, .ionicons,
 .ion-alert:before,
@@ -3065,7 +3078,7 @@ html {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  font-family: VAGRoundedBold;
+  font-family: VAGRounded;
   /* 1 */
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
@@ -3351,7 +3364,7 @@ body,
   word-wrap: break-word;
   font-size: 14px;
   font-family: -apple-system;
-  font-family: "-apple-system", "VAGRoundedBold", sans-serif;
+  font-family: "-apple-system", "VAGRounded", sans-serif;
   line-height: 20px;
   text-rendering: optimizeLegibility;
   -webkit-backface-visibility: hidden;

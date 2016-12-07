@@ -1329,15 +1329,17 @@ $state.go('side.forgotpw');
          $ionicLoading.show({
                 template: 'Downloading, Please wait....'
             });
-        cordova.InAppBrowser.open('https://secure.billi.be/gdl.php?id=' + id + '&token=' + token, '_self', 'closebuttoncaption=Back To MyBILLI', 'location=no'); 
-
+        cordova.InAppBrowser.open('https://invoice.billi.be/v1/download/'+token+'/'+id, '_system', 'location=no'); 
+		$ionic.Loading.hide();
+		cordova.InAppBrowser.close();
+		$state.go('side/invoices');
 
     })
     .controller('TicketsCtrl', function($scope, apiUrl, Serv, $localStorage, $ionicLoading, $translate) {
         $scope.curlang = $translate.use($localStorage.lang);
         $translate(['ticketid', 'ticketdate', 'ticketstatus', 'open_ticket', 'ticketsubject', 'ticketmessage', 'ticketpriority', 'ticketdepartment']).then(function(translations) {
             $ionicLoading.show({
-                template: 'Downloading...'
+                template: 'Please wait...'
             });
 
 
