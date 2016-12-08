@@ -118,5 +118,6 @@ var translations_fr = {
 		'changepasswordandlogin':'Change Pass and Login',
 		'entercodeandlogin':'Please enter code that send to your email and change your password above',
 		"error101":"Your new password and the confirmation did not match",
-		"error102":"Your access code is not correct please check your mailbox or junkmail"
+		"error102":"Your access code is not correct please check your mailbox or junkmail",
+		"yourbalance":"Wallet",
 }

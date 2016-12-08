@@ -70,7 +70,7 @@ angular.module('starter.controllers', ['ngStorage', 'ionic', 'pascalprecht.trans
                 "</div>"
         };
     }])
-    .controller('loginCtrl', function($scope, apiUrl, $http, $state, $timeout, $stateParams, Serv, $ionicPopup, $timeout, $location, $localStorage, $ionicLoading, $translate) {
+    .controller('loginCtrl', function($scope, apiUrl, $http, $state, $timeout, $stateParams, Serv, $ionicPopup, $timeout, $location, $localStorage, $ionicLoading, $translate, $ionicHistory) {
 
           $scope.curlang = $translate.use($localStorage.lang);
         $translate(['loginerror', 'error','tryagain']).then(function(translations) {
@@ -118,7 +118,10 @@ $state.go('side.forgotpw');
                      $localStorage.userid = data.data.userid;
                      
                      $ionicLoading.hide();
-
+					            $ionicLoading.hide(); 
+$ionicHistory.nextViewOptions({
+  disableBack: true
+});	
                      $state.go('side.dash');
                 
 
@@ -218,7 +221,7 @@ $state.go('side.forgotpw');
 });
 })
 
-.controller('validatetokenCtrl', function($scope, apiUrl, $state, $http, $stateParams, $timeout, $cordovaDevice, $ionicLoading, $ionicPopup, $localStorage, $translate) {
+.controller('validatetokenCtrl', function($scope, apiUrl, $state, $http, $stateParams, $timeout, $cordovaDevice, $ionicLoading, $ionicPopup, $localStorage, $translate, $ionicHistory) {
  var userid = $localStorage.tempid;
  console.log(userid);
  $scope.curlang = $translate.use($localStorage.lang);
@@ -258,14 +261,17 @@ $state.go('side.forgotpw');
             },
             success: function(data) {
 			console.log(data);
-			if(data.result == "success"){
+			if(data.result == "OK"){
 			  $localStorage.token = data.token;
             $localStorage.lang = data.lang;
             $localStorage.userid = data.userid;
 			delete $localStorage.tempid;
 			delete $localStorage.billipass;
 			
-            $ionicLoading.hide(); 	
+            $ionicLoading.hide(); 
+$ionicHistory.nextViewOptions({
+  disableBack: true
+});			
 			$state.go('side.dash'); 	
 			}else{
 			
@@ -300,7 +306,7 @@ $state.go('side.forgotpw');
  
 })
 
-.controller('SmsConfirmCtrl', function($scope, apiUrl, $state, $http, $stateParams, $cordovaDevice, $ionicLoading, $localStorage, $translate) {
+.controller('SmsConfirmCtrl', function($scope, apiUrl, $state, $http, $stateParams, $cordovaDevice, $ionicLoading, $localStorage, $translate, $ionicHistory) {
  var phone = $localStorage.phone;
  $scope.curlang = $translate.use($localStorage.lang);
    
@@ -358,7 +364,9 @@ $state.go('side.forgotpw');
             $localStorage.lang = data.lang;
             $localStorage.userid = data.userid;
             $ionicLoading.hide();  
-
+$ionicHistory.nextViewOptions({
+  disableBack: true
+});	
 
 
 
@@ -475,6 +483,8 @@ $state.go('side.forgotpw');
 .controller('DashCtrl', function($scope, apiUrl, Serv, $state, $localStorage, $ionicLoading, $translate) {
 
     $scope.curlang = $translate.use($localStorage.lang);
+	 $translate(['yourbalance']).then(function(translations) {
+
     $ionicLoading.show({
         template: '<ion-spinner icon="android">Loading...</ion-spinner>',
         noBackdrop: true
@@ -503,23 +513,31 @@ $state.go('side.forgotpw');
             }
             $ionicLoading.hide();
             $scope.data = data;
+			if(data.client.credit > 0){
+				 $('#balance').append('<div class="card">'+
+               '<div class="item item-text-wrap"><div class="tengahin">'+
+               translations.yourbalance+'<strong> &euro;'+data.client.credit+
+                '</strong></div>'+
+                '</div>'+
+                '</div>	');
+			}else{
+				$('#balance').append('<div class="card">'+
+               '<div class="item item-text-wrap"><div class="tengahin">'+
+               translations.yourbalance+'<strong> &euro;0.00'+
+                '</strong></div>'+
+                '</div>'+
+                '</div>	');
+			}
             if(data.stat.pendingorders > 0){
 
            $('#pendingorder').append('<div class="card bar-balanced">'+
-                '<div class="item item-text-wrap">'+
+                '<div class="item item-text-wrap tengah">'+
                '<a href="/#/side/pendingorder">You have '+data.stat.pendingorders+' pending order(s) in order to see or to complete this order please tap here'+
               '</strong></div>'+
                 '</div>');
 
 
 
-            }else{
-            $('#pendingorder').append('<div class="card bar-balanced">'+
-                '<div class="item item-text-wrap">'+
-            
-              '</strong></div>'+
-                '</div>');
-           
             }
         },
         error: function(e) {
@@ -528,7 +546,7 @@ $state.go('side.forgotpw');
         }
     });
 
-
+ });
 
 })
 
@@ -1702,24 +1720,73 @@ $state.go('side.forgotpw');
 
         };
     })
-    .controller('ContactCtrl', function($scope, apiUrl, $translate) {
-
-
-        var lat = 50.785639;
-        var lng = 5.517824;
+    .controller('ContactCtrl', function($scope, apiUrl, $translate, $compile, $cordovaGeolocation) {
+	//$scope.map = { center: { latitude: 50.785639, longitude: 5.517824 }, zoom: 15 };	
+	 angular.extend($scope, {
+        map: {
+            center: {
+                latitude: 50.785639,
+                longitude: 5.517824
+            },
+            zoom: 18,
+            markers: [],
+            events: {
+            click: function (map, eventName, originalEventArgs) {
+                var e = originalEventArgs[0];
+                var lat = e.latLng.lat(),lon = e.latLng.lng();
+                var marker = {
+                    id: Date.now(),
+                    coords: {
+                        latitude: 50.785639,
+                        longitude: 5.517824
+                    }
+                };
+                $scope.map.markers.push(marker);
+                console.log($scope.map.markers);
+                $scope.$apply();
+            }
+        }
+        }
+    });
+    /*
+	document.addEventListener("deviceready", onDeviceReady, false);
+        function onDeviceReady() {
+        var myLatlng = new google.maps.LatLng(50.785639,5.517824);
+        
         var mapOptions = {
-            center: new google.maps.LatLng(lat, lng),
-            zoom: 8
+          center: myLatlng,
+          zoom: 8,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
         };
-        $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
-        $scope.marker = new google.maps.Marker({
-            position: new google.maps.LatLng(lat, lng),
-            map: $scope.map,
-            title: 'Billi Bvba',
-            animation: google.maps.Animation.DROP
-        }, function(err) {
-            console.err(err);
+        var map = new google.maps.Map(document.getElementById("map"),
+            mapOptions);
+        
+        //Marker + infowindow + angularjs compiled ng-click
+        var contentString = "<div>Billi BVBA</div>";
+        var compiled = $compile(contentString)($scope);
+
+        var infowindow = new google.maps.InfoWindow({
+          content: compiled[0]
         });
+
+        var marker = new google.maps.Marker({
+          position: myLatlng,
+          map: map,
+          title: 'Billi BVBA',
+		   icon: 'https://bpanel.billi.be/assets/img/billimark.png'
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+          infowindow.open(map,marker);
+        });
+
+        $scope.map = map;
+ 
+        google.maps.event.addDomListener(window, 'load');      
+ 
+	}
+	*/
+
     })
 .controller('PendingOrderCtrl', function($scope, apiUrl, $location, $ionicLoading, Serv, $timeout, $ionicPopup, $localStorage, $stateParams, $translate) {
         var userid = $localStorage.userid;

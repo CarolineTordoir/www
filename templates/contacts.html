@@ -1,5 +1,7 @@
+	 
 <ion-view view-title="{{'contacts' | translate}}">
-  <ion-content>
+    <ion-content data-tap-disabled="true">
+
 <div class="bootstrap-iso">
 <div class="panel panel-default">
   <div class="panel-heading">{{"companyinfo" | translate}}: BILLI VBVA</div>
@@ -14,8 +16,14 @@
 </div>
 
 <div class="panel panel-default">
-  <div class="panel-heading">Maps</div>
- <div id="map" data-tap-disabled="true"></div>
+  <div class="panel-heading">Map Location</div>
+    
+
+      <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" events="map.events">
+        <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id"></ui-gmap-marker>
+    </ui-gmap-google-map>
+
+
    </div>
 
  
