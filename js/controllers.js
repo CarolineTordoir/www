@@ -206,14 +206,9 @@ $ionicHistory.nextViewOptions({
 			$localStorage.tempid = data.tempid;
 			$state.go('side.validatetoken');
 			
-            //        $state.reload(); 
                 }
 
                    
-            },
-            error: function(e) {
-                $ionicLoading.hide();   
-                alert('Error: Please close the app and reopen');
             }
         });
 
@@ -1811,7 +1806,7 @@ $ionicHistory.nextViewOptions({
                 success: function(data) {
                     console.log(data.data);
                     $ionicLoading.hide();
-                      $.each(data.data, function(i, item) {
+                    $.each(data.data, function(i, item) {
                     var regdate = item.date;
                     var image = item.image;
                     if (image.length == 0) {
