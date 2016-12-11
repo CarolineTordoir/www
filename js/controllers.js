@@ -1,4 +1,4 @@
-angular.module('starter.controllers', ['ngStorage', 'ionic', 'pascalprecht.translate', 'billi', 'ngPDFViewer', 'percentCircle-directive'])
+angular.module('starter.controllers', ['ngStorage', 'ionic', 'pascalprecht.translate', 'billi', 'percentCircle-directive'])
 
 .controller('LogoutCtrl', function($scope, apiUrl, Serv, $state, $http, $ionicLoading, $localStorage) {
 
@@ -1334,11 +1334,15 @@ $ionicHistory.nextViewOptions({
 
 
     })
-    .controller('InvoiceDownloadCtrl', function($scope, apiUrl, $http, $stateParams, $localStorage, Serv, $ionicLoading, $translate) {
+    .controller('InvoiceDownloadCtrl', function($scope, apiUrl, $state, $http, $stateParams, $localStorage, Serv, $ionicLoading, $translate) {
         $scope.curlang = $translate.use($localStorage.lang);
 
         var id = $stateParams.id;
-        var token = $localStorage.token;
+        var userid = $localStorage.userid;
+        console.log(id);
+         console.log(userid);
+
+        /*var token = $localStorage.token;
          $ionicLoading.show({
                 template: 'Downloading, Please wait....'
             });
@@ -1346,6 +1350,85 @@ $ionicHistory.nextViewOptions({
 		$ionic.Loading.hide();
 		cordova.InAppBrowser.close();
 		$state.go('side/invoices');
+        */
+function b64toBlob(b64Data, contentType, sliceSize) {
+        contentType = contentType || '';
+        sliceSize = sliceSize || 512;
+
+        var byteCharacters = atob(b64Data);
+        var byteArrays = [];
+
+        for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+            var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+            var byteNumbers = new Array(slice.length);
+            for (var i = 0; i < slice.length; i++) {
+                byteNumbers[i] = slice.charCodeAt(i);
+            }
+
+            var byteArray = new Uint8Array(byteNumbers);
+
+            byteArrays.push(byteArray);
+        }
+
+      var blob = new Blob(byteArrays, {type: contentType});
+      return blob;
+}
+
+/**
+ * Create a PDF file according to its database64 content only.
+ * 
+ * @param folderpath {String} The folder where the file will be created
+ * @param filename {String} The name of the file that will be created
+ * @param content {Base64 String} Important : The content can't contain the following string (data:application/pdf;base64). Only the base64 string is expected.
+ */
+function savebase64AsPDF(folderpath,filename,content,contentType){
+    // Convert the base64 string in a Blob
+    var DataBlob = b64toBlob(content,contentType);
+    
+    console.log("Starting to write the file :3");
+    
+    window.resolveLocalFileSystemURL(folderpath, function(dir) {
+        console.log("Access to the directory granted succesfully");
+        dir.getFile(filename, {create:true}, function(file) {
+            console.log("File created succesfully.");
+            file.createWriter(function(fileWriter) {
+                console.log("Writing content to file");
+                fileWriter.write(DataBlob);
+            }, function(){
+                alert('Unable to save file in path '+ folderpath);
+            });
+        });
+    });
+}
+
+ $ionicLoading.show({
+                template: 'Downloading, Please wait....'
+            });
+var link = "https://invoice.billi.be/v1/getinvoice";
+        $.ajax({
+            type: "POST",
+            url: link,
+            dataType: "json",
+            data: {
+                userid: userid,
+                invoiceid: id
+            },
+            success: function(data) {
+console.log(data);
+var myBase64 = data.pdf;
+// Define the mimetype of the file to save, in this case a PDF
+var contentType = "application/pdf";
+// The path where the file will be saved
+var folderpath = "file:///storage/emulated/0/Download/";
+// The name of your file
+var filename = id+".pdf";
+savebase64AsPDF(folderpath,filename,myBase64,contentType);
+$ionicLoading.hide();
+window.open(encodeURI('file:///storage/emulated/0/Download/'+filename), '_system');
+$state.go('side.invoices');                               
+            }
+        });
 
     })
     .controller('TicketsCtrl', function($scope, apiUrl, Serv, $localStorage, $ionicLoading, $translate) {
@@ -1641,22 +1724,94 @@ $ionicHistory.nextViewOptions({
 
     })
 
-.controller('TosCtrl', ['$scope', 'PDFViewerService', function($scope, apiUrl, pdf) {
-        $scope.viewer = pdf.Instance("viewer");
+ .controller('TosCtrl', function($scope, apiUrl, $http, $stateParams, $localStorage, Serv, $ionicModal, $state, $ionicLoading, $translate) {
+var lang = $localStorage.lang;
 
-        $scope.nextPage = function() {
-            $scope.viewer.nextPage();
-        };
+function b64toBlob(b64Data, contentType, sliceSize) {
+        contentType = contentType || '';
+        sliceSize = sliceSize || 512;
 
-        $scope.prevPage = function() {
-            $scope.viewer.prevPage();
-        };
+        var byteCharacters = atob(b64Data);
+        var byteArrays = [];
 
-        $scope.pageLoaded = function(curPage, totalPages) {
-            $scope.currentPage = curPage;
-            $scope.totalPages = totalPages;
-        };
-    }])
+        for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+            var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+            var byteNumbers = new Array(slice.length);
+            for (var i = 0; i < slice.length; i++) {
+                byteNumbers[i] = slice.charCodeAt(i);
+            }
+
+            var byteArray = new Uint8Array(byteNumbers);
+
+            byteArrays.push(byteArray);
+        }
+
+      var blob = new Blob(byteArrays, {type: contentType});
+      return blob;
+}
+
+/**
+ * Create a PDF file according to its database64 content only.
+ * 
+ * @param folderpath {String} The folder where the file will be created
+ * @param filename {String} The name of the file that will be created
+ * @param content {Base64 String} Important : The content can't contain the following string (data:application/pdf;base64). Only the base64 string is expected.
+ */
+function savebase64AsPDF(folderpath,filename,content,contentType){
+    // Convert the base64 string in a Blob
+    var DataBlob = b64toBlob(content,contentType);
+    
+    console.log("Starting to write the file :3");
+    
+    window.resolveLocalFileSystemURL(folderpath, function(dir) {
+        console.log("Access to the directory granted succesfully");
+        dir.getFile(filename, {create:true}, function(file) {
+            console.log("File created succesfully.");
+            file.createWriter(function(fileWriter) {
+                console.log("Writing content to file");
+                fileWriter.write(DataBlob);
+            }, function(){
+                alert('Unable to save file in path '+ folderpath);
+            });
+        });
+    });
+}
+ $ionicLoading.show({
+                template: 'Downloading, Please wait....'
+            });
+var link = "https://invoice.billi.be/v1/tos/"+lang;
+        $.ajax({
+            type: "POST",
+            url: link,
+            dataType: "json",
+            data: {
+                lang: lang
+            },
+            success: function(data) {
+                console.log(data);
+var myBase64 = data.pdf;
+// Define the mimetype of the file to save, in this case a PDF
+var contentType = "application/pdf";
+// The path where the file will be saved
+var folderpath = "file:///storage/emulated/0/Download/";
+// The name of your file
+var filename = "tos_"+lang+".pdf";
+savebase64AsPDF(folderpath,filename,myBase64,contentType);
+$ionicLoading.hide();
+window.open(encodeURI('file:///storage/emulated/0/Download/'+filename), '_system');                                
+            }
+        });
+
+
+
+
+
+
+
+
+
+})
     .controller('MobileBlockCtrl', function($scope, apiUrl, $state, $ionicLoading, Serv, $ionicPopup, $timeout, $localStorage, $stateParams, $translate) {
         var id = $stateParams.id;
         $scope.curlang = $translate.use($localStorage.lang);
@@ -1715,7 +1870,7 @@ $ionicHistory.nextViewOptions({
 
         };
     })
-    .controller('ContactCtrl', function($scope, apiUrl, $translate, $compile, $cordovaGeolocation) {
+    .controller('ContactCtrl', function($scope, apiUrl, $translate, $compile) {
 	//$scope.map = { center: { latitude: 50.785639, longitude: 5.517824 }, zoom: 15 };	
 	 angular.extend($scope, {
         map: {

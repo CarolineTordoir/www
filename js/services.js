@@ -9,6 +9,7 @@ angular.module('starter.services', [])
             if(device.uuid == null){
 
                 var uuid = "browser"+device.version;
+                
             }else{
 
 
