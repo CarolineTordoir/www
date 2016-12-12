@@ -24,7 +24,7 @@ var translations_nl = {
 		"username": "Gebruikersnaam",
 		"password": "Paswoord",
 		"location": "Locatie",
-		"modem serial": "Serienummer Modem",
+		"modemserial": "Serienummer Modem",
 		"ipv4": "IPV4",
 		"profile": "Profiel",
 		"Wifissid": "WIFI-SSID",
