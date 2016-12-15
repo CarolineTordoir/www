@@ -1,6 +1,10 @@
     <ion-view view-title="Line Test">     
     <ion-content>
-	<div class="row">
+ <div class="card"> 
+                <div class="item item-text-wrap"> 
+                {{"checkinternetinfo" | translate}}
+                </div>
+                </div> 
 	<div class="list">
    <label class="item item-input item-stacked-label">
    <span class="input-label">Postcode</span>
@@ -36,7 +40,9 @@
    
    
 </div>
+ 
+  <div class="row">
 <button class="button button-block button-balanced" ng-click="checkline(user);">Check Internet Avaibility</button>
-    </div>
+  </div>
 	</ion-content>
     </ion-view>

@@ -2075,10 +2075,36 @@ window.open(encodeURI('file:///storage/emulated/0/Download/'+filename), '_system
         };
     })
 	
-.controller('TestCtrl', function($scope, apiUrl, $ionicLoading, $localStorage, Serv, $stateParams, $compile, $translate) {
+.controller('TestCtrl', function($scope, apiUrl, $ionicLoading, $localStorage, $translate) {
     $scope.curlang = $translate.use($localStorage.lang);
 	var token = $localStorage.token;
 	var userid = $localStorage.userid;
+	
+	 $scope.checkline = function(user) {
+		   $ionicLoading.show({
+        template: '<ion-spinner icon="android"></ion-spinner>'
+    });
+	   var link = apiUrl+'checkline';
+            $.ajax({
+                type: "POST",
+                url: link,
+                dataType: "json",
+                data: user,
+                success: function(data) {
+                    
+                   console.log(data);
+				   $ionicLoading.hide();
+
+                },
+                error: function(e) {
+                    alert('Error: ' + e.message);
+					$ionicLoading.hide();
+                }
+            });
+			
+			
+	
+	 };
 	
 })
 
