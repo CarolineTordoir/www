@@ -306,8 +306,28 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services','bi
         }
       }
     })
+
+   .state('side.addmoney', {
+      url: '/addmoney',
+      cache: false,
+      views: {
+        menuContent: {
+          templateUrl: 'templates/addmoney.html',
+          controller: 'AddmoneyCtrl'
+        }
+      }
+    })
 	
-	
+	   .state('side.testresult', {
+      url: '/testresult',
+      cache: false,
+      views: {
+        menuContent: {
+          templateUrl: 'templates/test-result.html',
+          controller: 'TestResultCtrl'
+        }
+      }
+    })
    .state('side.download', {
       url: '/download/:id',
       views: {

@@ -303,8 +303,8 @@ $ionicHistory.nextViewOptions({
 
 .controller('SmsConfirmCtrl', function($scope, apiUrl, $state, $http, $stateParams, $cordovaDevice, $ionicLoading, $localStorage, $translate, $ionicHistory) {
  var phone = $localStorage.phone;
+ $scope.phonenumber = phone;
  $scope.curlang = $translate.use($localStorage.lang);
-   
   document.addEventListener("deviceready", onDeviceReady, false);
 
 
@@ -475,11 +475,21 @@ $ionicHistory.nextViewOptions({
      });
 })
 
+.controller('AddmoneyCtrl', function($scope, apiUrl, Serv, $state, $localStorage, $ionicLoading, $translate) {
+
+    $scope.curlang = $translate.use($localStorage.lang);
+
+
+})
+
 .controller('DashCtrl', function($scope, apiUrl, Serv, $state, $localStorage, $ionicLoading, $translate) {
 
     $scope.curlang = $translate.use($localStorage.lang);
 	 $translate(['yourbalance']).then(function(translations) {
+        $scope.addmoney = function(){
+        $state.go('side.addmoney');
 
+        };
     $ionicLoading.show({
         template: '<ion-spinner icon="android">Loading...</ion-spinner>',
         noBackdrop: true
@@ -500,7 +510,7 @@ $ionicHistory.nextViewOptions({
             token: token
         },
         success: function(data) {
-            //console.log(data);
+            console.log(data);
             if (data.stat.invoice > 0) {
                 var style = "assertive";
             } else {
@@ -508,10 +518,10 @@ $ionicHistory.nextViewOptions({
             }
             $ionicLoading.hide();
             $scope.data = data;
-			if(data.client.credit > 0){
+			if(data.client.client.credit > 0){
 				 $('#balance').append('<div class="card">'+
                '<div class="item item-text-wrap"><div class="tengahin">'+
-               translations.yourbalance+'<strong> &euro;'+data.client.credit+
+               translations.yourbalance+'<strong> &euro;'+data.client.client.credit+
                 '</strong></div>'+
                 '</div>'+
                 '</div>	');
@@ -2075,8 +2085,9 @@ window.open(encodeURI('file:///storage/emulated/0/Download/'+filename), '_system
         };
     })
 	
-.controller('TestCtrl', function($scope, apiUrl, $ionicLoading, $localStorage, $translate) {
+.controller('TestCtrl', function($scope, apiUrl, $state, $ionicLoading, $localStorage, $translate) {
     $scope.curlang = $translate.use($localStorage.lang);
+
 	var token = $localStorage.token;
 	var userid = $localStorage.userid;
 	
@@ -2091,8 +2102,9 @@ window.open(encodeURI('file:///storage/emulated/0/Download/'+filename), '_system
                 dataType: "json",
                 data: user,
                 success: function(data) {
-                    
-                   console.log(data);
+                $localStorage.result = data;
+                   //console.log(data);
+                   $state.go('side.testresult');
 				   $ionicLoading.hide();
 
                 },
@@ -2108,13 +2120,20 @@ window.open(encodeURI('file:///storage/emulated/0/Download/'+filename), '_system
 	
 })
 
+.controller('TestResultCtrl', function($scope, apiUrl, $state, $ionicLoading, $localStorage, $translate) {
+    $scope.curlang = $translate.use($localStorage.lang);
+    $scope.result = $localStorage.result;
+    console.log($scope.result);
+    
+})
+
 .controller('AccountCtrl', function($scope, apiUrl, $ionicLoading, $localStorage, Serv, $stateParams, $compile, $translate) {
     $scope.curlang = $translate.use($localStorage.lang);
 	var token = $localStorage.token;
 	var userid = $localStorage.userid;
 	    $scope.pushNotificationChange = function(data) {
 			  $ionicLoading.show({
-        template: '<ion-spinner icon="android"></ion-spinner>'
+      template: '<ion-spinner icon="lines"  class="spinner-balanced"></ion-spinner>'
     });
 			var str = data.split(':');	
 		if(str[1] == 'true'){
@@ -2176,8 +2195,18 @@ window.open(encodeURI('file:///storage/emulated/0/Download/'+filename), '_system
 	},
 						
                         success: function(data) {
+                        if(cc.language == "french"){
+                        $localStorage.lang = "fr";
+                        }else if(cc.language == "dutch"){
+                        $localStorage.lang =  "nl";
+                        }else{
+                        $localStorage.lang = "en";
+
+                        }
+                        
                             $ionicLoading.hide();
-                            console.log(data);
+
+                            $state.reload();
 
                         },
                         error: function(e) {
@@ -2200,7 +2229,7 @@ window.open(encodeURI('file:///storage/emulated/0/Download/'+filename), '_system
 
     var link = apiUrl+"getdetail";
     $ionicLoading.show({
-        template: '<ion-spinner icon="android"></ion-spinner>'
+        template: '<ion-spinner icon="lines"  class="spinner-balanced"></ion-spinner>'
     });
     $.ajax({
         type: "POST",
