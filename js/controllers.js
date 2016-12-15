@@ -2082,7 +2082,7 @@ window.open(encodeURI('file:///storage/emulated/0/Download/'+filename), '_system
 	
 	 $scope.checkline = function(user) {
 		   $ionicLoading.show({
-        template: '<ion-spinner icon="android"></ion-spinner>'
+        template: '<ion-spinner icon="lines"  class="spinner-energized"></ion-spinner>'
     });
 	   var link = apiUrl+'checkline';
             $.ajax({
