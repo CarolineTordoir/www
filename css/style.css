@@ -220,3 +220,28 @@ table#acrylic {
 .scroll {
   height: 100%;
 }
+.icontainer{
+    position: absolute;
+    top: 40%;
+    left: 18%;
+    width: 64%;
+}
+#payment_i {
+    /*positioning */
+    box-sizing: border-box;
+    width:100%;
+    height: 5%;
+    /*content*/
+    background-color: transparent;
+    border: solid;
+    border-color: red;
+}
+.pepo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 50%;
+    transform: translate(-50%, -50%);
+    display: block;
+
+}

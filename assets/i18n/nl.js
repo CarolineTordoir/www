@@ -1,4 +1,7 @@
 var translations_nl = {
+		"french": "Français",
+		"dutch": "Nederlands",
+		"english": "English",
         "title" : "myBILLI",      
         "dashboard": "Dashboard",
         "welcome back": "Welkom",
@@ -44,11 +47,13 @@ var translations_nl = {
 		"usage": "Verbruik",
 		"firstname": "Voornaam",
 		"lastname": "Naam",
+		"address1": "Adres",
 		"city": "Stad",
 		"email": "Email",
 		"postcode": "Postcode",
 		"country": "Land",
 		"language": "Taal",
+		"phone": "Telefoon",
 		"vat": "BTW",
 		"companyanme": "Bedrijfsnaam",
 		"invoiceno": "Factuurnummer",
@@ -120,4 +125,11 @@ var translations_nl = {
 		"error101":"Your new password and the confirmation did not match",
 		"error102":"Your access code is not correct please check your mailbox or junkmail",
 		"yourbalance":"Wallet",
+		"paymentmethod": "Paymentmethod",
+		"sisowmc": "Bankcontact",
+		"sisowcc": "Credit Card",
+		"paypal": "Paypal",
+		"directdebit": "Directdebit SEPA",
+		"einvoice": "eInvoice",
+		"nationalnumber": "National Number"
 }

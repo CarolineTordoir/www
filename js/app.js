@@ -86,7 +86,18 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services','bi
     }
   })
 
-
+.state('side.linetest', {
+    url: '/linetest',
+    cache: false,
+    views: {
+       menuContent: {
+        templateUrl: 'templates/test.html',
+        controller: 'TestCtrl'
+      }
+    }
+  })
+  
+  
    .state('side.validatetoken', {
     url: '/validatetoken',
     cache: false,

@@ -1,0 +1,42 @@
+    <ion-view view-title="Line Test">     
+    <ion-content>
+	<div class="row">
+	<div class="list">
+   <label class="item item-input item-stacked-label">
+   <span class="input-label">Postcode</span>
+   <input ng-model="user.postcode" type="text" placeholder="3700">
+   </label>
+
+   <label class="item item-input item-stacked-label">
+   <span class="input-label">City</span>
+   <input ng-model="user.city" type="text" placeholder="Tongeren">
+   </label>
+   
+    <label class="item item-input item-stacked-label">
+   <span class="input-label">Street</span>
+   <input ng-model="user.street" type="text" placeholder="Vrijheidweg">
+   </label>
+   
+   
+    <label class="item item-input item-stacked-label">
+   <span class="input-label">Housenumber</span>
+   <input ng-model="user.number" type="text" placeholder="1">
+   </label>
+   
+   
+    <label class="item item-input item-stacked-label">
+   <span class="input-label">Mailbox</span>
+   <input ng-model="user.mailbox" type="text" placeholder="1">
+   </label>
+   
+    <label class="item item-input item-stacked-label">
+   <span class="input-label">Alphabet</span>
+   <input ng-model="user.alpha" type="text" placeholder="A-Z">
+   </label>
+   
+   
+</div>
+<button class="button button-block button-balanced" ng-click="checkline(user);">Check Internet Avaibility</button>
+    </div>
+	</ion-content>
+    </ion-view>

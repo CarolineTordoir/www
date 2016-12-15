@@ -1,16 +1,18 @@
     <ion-view view-title="{{'payonline' | translate}}">     
     <ion-content>
+	<div class="icontainer">
+<!--
  <div class="row row-center">
       <div class="col col-center">
        <a ng-click="openExternal('sisowmc')" class="button button-block button-clear">
-			<img  width="100" src="img/mistercash.jpeg" height="40" alt="Pay with Bancontact" title="Pay with Bancontact"></a>
+			<img  src="img/mistercash.png" width="150" alt="Pay with Bancontact" title="Pay with Bancontact"></a>
       </div>
     </div>
     <div class="row">
       <div class="col">
        
           <a ng-click="openExternal('sisowcc')" class="button button-block button-clear">
-			<img  width="100" src="img/visamastercard.png" height="40" alt="Pay with Visa" title="Pay with Visa"></a>
+			<img  src="img/visamastercard.png" witdh="150" alt="Pay with Visa" title="Pay with Visa"></a>
    
       </div>
     </div>
@@ -18,11 +20,21 @@
       <div class="col col-center">
        
          <a ng-click="openExternal('paypal')">
-			<img  width="100" src="img/paypalme.png" height="40" alt="Pay with Paypal" title="Pay with Paypal"></a>
+			<img  src="img/paypalme.png" width="150" alt="Pay with Paypal" title="Pay with Paypal"></a>
    
       </div>
     </div>
-	
+	-->
+	<a  ng-click="openExternal('sisowcc')" class="button button-block button-assertive button-outline">
+   <img  src="img/cc.png" class="pepo" height="60">
+</a>
+<a ng-click="openExternal('sisowmc')" class="button button-block button-assertive button-outline">
+  <img  src="img/bci.png" class="pepo">
+</a>
+<a ng-click="openExternal('paypal')" class="button button-block button-assertive button-outline">
+  <img src="img/pp.png" class="pepo">
+</a>
+	</div>
 
     </ion-content>
     </ion-view>

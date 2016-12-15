@@ -1992,9 +1992,9 @@ window.open(encodeURI('file:///storage/emulated/0/Download/'+filename), '_system
 
                        }
                         if(step == 2 && item.install_date != null){
-                    var u = item.install_date;
-                    u = u.substr(0, 10).split("-");
-                    u = u[2] + "/" + u[1] + "/" + u[0];
+						var u = item.install_date;
+						u = u.substr(0, 10).split("-");
+                        u = u[2] + "/" + u[1] + "/" + u[0];
 
                         $scope.percentage     = 75;
                          $scope.installdate = u;
@@ -2074,12 +2074,99 @@ window.open(encodeURI('file:///storage/emulated/0/Download/'+filename), '_system
 
         };
     })
+	
+.controller('TestCtrl', function($scope, apiUrl, $ionicLoading, $localStorage, Serv, $stateParams, $compile, $translate) {
+    $scope.curlang = $translate.use($localStorage.lang);
+	var token = $localStorage.token;
+	var userid = $localStorage.userid;
+	
+})
+
 .controller('AccountCtrl', function($scope, apiUrl, $ionicLoading, $localStorage, Serv, $stateParams, $compile, $translate) {
     $scope.curlang = $translate.use($localStorage.lang);
-    $scope.settings = {
+	var token = $localStorage.token;
+	var userid = $localStorage.userid;
+	    $scope.pushNotificationChange = function(data) {
+			  $ionicLoading.show({
+        template: '<ion-spinner icon="android"></ion-spinner>'
+    });
+			var str = data.split(':');	
+		if(str[1] == 'true'){
+			
+			var value='yes';
+		}else{
+			var value='no';
+		}
+					$.ajax({
+                        type: "POST",
+                        url: apiUrl+'setcustomfieldsvalue',
+                        dataType: "json",
+                        data: {
+                            userid: userid,
+                            val: value,
+							fieldid: '9'
+                        },
+                        success: function(data) {
+                            $ionicLoading.hide();
+                            console.log(data);
+
+                        },
+                        error: function(e) {
+							 $ionicLoading.hide();
+                            alert('Error: ' + e.message);
+                        }
+                    });
+
+                };
+
+                
+	$scope.saveclient = function(cc) {
+		 $ionicLoading.show({
+        template: '<ion-spinner icon="android"></ion-spinner>'
+    });
+	
+
+			$.ajax({
+                        type: "POST",
+                        url: apiUrl+'updateclientinfo',
+                        dataType: "json",
+                        data: {
+		'id': userid,
+		'token': token,
+		'firstname': cc.firstname,
+		'lastname': cc.lastname,
+		'country': cc.country,
+		'address1': cc.address1,
+		'postcode': cc.postcode,
+		'paymentmethod': cc.defaultgateway,
+		'language': cc.language,
+		'email': cc.email,
+		'phonenumber': cc.phonenumber,
+		'city': cc.city,
+		'customfields': {
+			'51': cc.nationalnumber,
+			'9' : cc.einvoice
+		}
+	},
+						
+                        success: function(data) {
+                            $ionicLoading.hide();
+                            console.log(data);
+
+                        },
+                        error: function(e) {
+							 $ionicLoading.hide();
+                            alert('Error: ' + e.message);
+                        }
+                    });
+					
+					
+	
+	};
+			$scope.settings = {
         enableFriends: true
     };
-
+	
 
     var dutch = '';
     var french = '';
@@ -2098,81 +2185,104 @@ window.open(encodeURI('file:///storage/emulated/0/Download/'+filename), '_system
         },
 
         success: function(kuman) {
-            ////console.log(kuman);
+            console.log(kuman);
+	$scope.kuman = kuman.client;
+	$scope.extra = kuman.extra;
+	var extra = [];
+	$scope.nationalnumber = "";
+		$scope.pushNotification_einvoice = {
+                    checked: false,
+                    id: 'einvoice'
+                };
+	 $.each(kuman.extra, function(i, item) {
+		if(item.fieldid == "9" && item.value == "yes"){
+		$scope.pushNotification_einvoice = {
+                    checked: true,
+                    id: 'einvoice'
+                };
+			
+		}	
+	if(item.fieldid == "51"){
+		$scope.kuman.nationalnumber = item.value;
+		
+		}
+		if(kuman.client.groupid != "1" || kuman.client.groupid != "2"){
+		$scope.company = true;
+		if(item.fieldid == "1"){
+		$scope.kuman.btw = item.value;
+		}		
+			
+		}
+		
+	 });
+	if(kuman.client.language == "dutch"){
+		var op = 'dutch';	
+		}else if(kuman.client.language == "french"){
+		 var op = 'french';
+		}else{
+		var op = 'english';	
+		}
+	if(kuman.client.defaultgateway == "sisowmc"){
+		var pay = 'sisowmc';	
+		}else if(kuman.client.defaultgateway == "sisowcc"){
+		 var pay = 'sisowcc';
+		}else if(kuman.client.defaultgateway == "paypal"){
+		var pay = 'paypal';
+		}else{
+		var pay = 'sisowmc';	
+		}
+	$scope.filterCondition = {
+		operator: op
+       
+    }
+	$scope.filterCondition1 = {
+		operator: pay
+       
+    }
+	$scope.filterCondition2 = {
+		operator: kuman.client.country
+       
+    }
 
-            $.each(kuman.language, function(i, item) {
-
-                if (item == 'dutch') {
-
-                    var dutch = ' selected';
-                } else if (item == "french") {
-
-                    var french = ' selected';
-                } else {
-
-                    var english = ' selected';
-                }
-
-
-            });
-            $ionicLoading.hide();
-            $("#Account").append($compile('<div class="card">' +
-                '<div class="item item-text-wrap">' +
-                '<p>Changing Information below will change your Invoice Information.</p>' +
-                '</div>' +
-                '</div>' +
-                '<div class="card">' +
-                '<div class="item item-text-wrap">' +
-                '<div class="list">' +
-                '<label class="item item-input">' +
-                '<span class="input-label">Firstname</span>' +
-                '<input type="text" class="kanan" value="' + kuman.firstname + '">' +
-                '</label>' +
-                '<label class="item item-input">' +
-                '<span class="input-label">Lastname</span>' +
-                '<input type="text" class="kanan" value="' + kuman.lastname + '">' +
-                '</label>' +
-                '<label class="item item-input">' +
-                '<span class="input-label">Address</span>' +
-                '<input type="text" class="kanan" value="' + kuman.address1 + '">' +
-                '</label>' +
-                '<label class="item item-input">' +
-                '<span class="input-label">Postcode</span>' +
-                '<input type="text" class="kanan" value="' + kuman.postcode + '">' +
-                '</label>' +
-                '<label class="item item-input">' +
-                '<span class="input-label">City</span>' +
-                '<input type="text" class="kanan" value="' + kuman.city + '">' +
-                '</label>' +
-                '<label class="item item-input">' +
-                '<span class="input-label">Country</span>' +
-                '<input type="text" class="kanan" value="' + kuman.country + '">' +
-                '</label>' +
-                '<label class="item item-input">' +
-                '<span class="input-label">Phonenumber</span>' +
-                '<input type="text" class="kanan" value="' + kuman.phonenumber + '">' +
-                '</label>' +
-                '<label class="item item-input">' +
-                '<span class="input-label">Email</span>' +
-                '<input type="text" class="kanan" value="' + kuman.email + '">' +
-                '</label>' +
-                '<label class="item item-input item-select">' +
-                '<div class="input-label">' +
-                'Language' +
-                '</div>' +
-                '<select>' +
-                '<option value="dutch"' + dutch + '>Dutch</option>' +
-                '<option value="english"' + english + '>English</option>' +
-                '<option value="french"' + french + '>French</option>' +
-                '</select>' +
-                '</label>' +
-                '<button class="button button-block button-simson">' +
-                'Save Information' +
-                '</button>' +
-                '</div></div></div>')($scope));
-
-
-        },
+	$scope.payments = [{
+        value: 'sisowmc',
+        displayName: 'Bancontact'
+    }, {
+        value: 'sisowcc',
+        displayName: 'Mastercad VISA'
+    },{
+        value: 'paypal',
+        displayName: 'Paypal'
+    }];
+	
+	
+    $scope.operators = [{
+        value: 'english',
+        displayName: 'English'
+    }, {
+        value: 'french',
+        displayName: 'Français'
+    },{
+        value: 'dutch',
+        displayName: 'Nederlands'
+    }];
+	
+	$scope.countries = [
+	  { displayName: '', value: ''},
+      { displayName: 'Belgium', value: 'BE'},
+      { displayName: 'French', value: 'FR'},
+      { displayName: 'Germany', value: 'DE'},
+      { displayName: 'Luxemburg', value: 'LU'},
+      { displayName: 'Netherlands', value: 'NL'},
+      { displayName: 'Switzerland', value: 'CZ'},
+	  { displayName: 'Italy', value: 'IT'},
+      { displayName: 'United Kindom', value: 'UK'
+	  }];
+	
+	
+ $scope.settingsList = extra;
+   $ionicLoading.hide();
+          },
         error: function(e) {
             alert('Error: ' + e.message);
         }

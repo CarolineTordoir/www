@@ -1,6 +1,93 @@
    <ion-view view-title="{{'myaccount' | translate}}">     
     <ion-content>
-        <div id="Account"></div>
+     <div class="card"> 
+                <div class="item item-text-wrap"> 
+                {{"changeinfo" | translate}}
+                </div>
+                </div> 
+                <div class="card"> 
+				 <form name="myForm" novalidate>
+                <div class="item item-text-wrap"> 
+                <div class="list"> 
+				<div ng-if="company === true">
+				<label class="item item-input"> 
+                <span class="input-label">{{"companyname" | translate}}</span> 
+                <input  ng-model="kuman.companyname" type="text" class="kanan" name="client.companyname" required>
+                </label> 
+				
+				<label class="item item-input"> 
+                <span class="input-label">{{"btw" | translate}}</span> 
+                <input  ng-model="kuman.btw" type="text" class="kanan" name="client.btw" required>
+                </label> 
+				
+				
+				</div>
+
+                <label class="item item-input"> 
+                <span class="input-label">{{"firstname" | translate}}</span> 
+                <input  ng-model="kuman.firstname" type="text" class="kanan" name="client.firstname" required>
+                </label> 
+                <label class="item item-input"> 
+                <span class="input-label">{{"lastname" | translate}}</span> 
+                <input  ng-model="kuman.lastname" type="text" class="kanan" name="client.lastname" required>
+                </label> 
+                <label class="item item-input"> 
+                <span class="input-label">{{"address1" | translate}}</span> 
+                <input ng-model="kuman.address1"  type="text" class="kanan" name="client.address1" required>
+                </label> 
+                <label class="item item-input"> 
+                <span class="input-label">{{"postcode" | translate}}</span> 
+                <input  ng-model="kuman.postcode" type="text" class="kanan" name="client.postcode" required>
+                </label> 
+                <label class="item item-input"> 
+                <span class="input-label">{{"city" | translate}}</span> 
+                <input  ng-model="kuman.city" type="text" class="kanan" name="client.city}}" required>
+                </label> 
+                <label class="item item-input item-select"> 
+                <span class="input-label">{{"country" | translate}}</span> 
+                <select ng-model="kuman.country">
+				<option ng-selected="{{country.value == filterCondition2.operator}}" ng-repeat="country in countries" value="{{country.value}}">{{country.displayName}}</option>
+				</select>
+                </label> 
+                <label class="item item-input"> 
+                <span class="input-label">{{"phone" | translate}}</span> 
+                <input  ng-model="kuman.phonenumber" type="text" class="kanan" name="client.phonenumber" required>
+                </label> 
+                <label class="item item-input"> 
+                <span class="input-label">{{"email" | translate}}</span> 
+                <input ng-model="kuman.email" type="text" class="kanan" name="client.email" required>
+                </label> 
+				<label class="item item-input"> 
+                <span class="input-label">{{"nationalnumber" | translate}}</span> 
+                <input  ng-model="kuman.nationalnumber" type="text" class="kanan" name="client.extra.nationalnumber" required>
+                </label> 
+				  <label class="item item-input item-select"> 
+                <div class="input-label"> 
+                {{"paymentmethod" | translate}} 
+                </div> 
+                <select ng-model="kuman.defaultgateway">
+				<option ng-selected="{{payment.value == filterCondition1.operator}}" ng-repeat="payment in payments" value="{{payment.value}}" required>{{payment.displayName}}</option>
+				</select>
+                </label> 
+				
+                <label class="item item-input item-select"> 
+                <div class="input-label"> 
+                {{"language" | translate}} 
+                </div> 
+                <select ng-model="kuman.language">
+				<option ng-selected="{{operator.value == filterCondition.operator}}" ng-repeat="operator in operators" value="{{operator.value}}" required>{{operator.displayName}}</option>
+				</select>
+                </label> 
+				<ion-toggle ng-model="pushNotification_einvoice.checked"
+                    ng-change="pushNotificationChange(pushNotification_einvoice.id+':'+pushNotification_einvoice.checked)">
+         {{"einvoice" | translate}} 
+        </ion-toggle>
+                <button class="button button-block button-simson" ng-click="saveclient(kuman);"> 
+                {{"save"	| translate}}
+                </button> 
+                </div></div>
+				</form>
+				</div>
        
     </ion-content>
     </ion-view>
