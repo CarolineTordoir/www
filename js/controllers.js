@@ -3,7 +3,7 @@ angular.module('starter.controllers', ['ngStorage', 'ionic', 'pascalprecht.trans
 .controller('LogoutCtrl', function($scope, apiUrl, Serv, $state, $http, $ionicLoading, $localStorage) {
 
         $ionicLoading.show({
-            template: '<ion-spinner icon="android"></ion-spinner>'
+            template: '<ion-spinner icon="android" class="spinner-energized"></ion-spinner>'
         });
         var link = apiUrl+"logout";
         $http.get(link).then(function(res) {
@@ -409,7 +409,7 @@ $ionicHistory.nextViewOptions({
     });
     $scope.submiticket = function(submiticket) {
         $ionicLoading.show({
-            template: '<ion-spinner icon="android"></ion-spinner>'
+            template: '<ion-spinner icon="android" class="spinner-energized"></ion-spinner>'
         });
         var url = apiUrl+"submitticket";
         $.ajax({
@@ -491,7 +491,7 @@ $ionicHistory.nextViewOptions({
 
         };
     $ionicLoading.show({
-        template: '<ion-spinner icon="android">Loading...</ion-spinner>',
+        template: '<ion-spinner icon="android" class="spinner-energized"></ion-spinner>',
         noBackdrop: true
     });
 
@@ -563,7 +563,7 @@ $ionicHistory.nextViewOptions({
     $translate(['recurring', 'status', 'show_details']).then(function(translations) {
 
         $ionicLoading.show({
-            template: '<ion-spinner icon="android"></ion-spinner>'
+            template: '<ion-spinner icon="android" class="spinner-energized"></ion-spinner>'
         });
         
         var token = $localStorage.token;
@@ -607,7 +607,7 @@ $ionicHistory.nextViewOptions({
         $scope.curlang = $translate.use($localStorage.lang);
         $translate(['changingkey', 'status', 'recurring','package','save','close','wifissid','wifikey','profile','changewifikey','hardware','changewifissid','modemserial','lineid','modem','username','password','location','orderdate', 'orderid', 'status', 'addonname', 'cycle']).then(function(translations) {
         $ionicLoading.show({
-            template: '<ion-spinner icon="android"></ion-spinner>'
+            template: '<ion-spinner icon="android" class="spinner-energized"></ion-spinner>'
         });
 
         $scope.data = {};
@@ -616,7 +616,7 @@ $ionicHistory.nextViewOptions({
 
         $scope.mobilechangessid = function(ssid) {
             $ionicLoading.show({
-                template: '<ion-spinner icon="android"></ion-spinner>'
+                template: '<ion-spinner icon="android" class="spinner-energized"></ion-spinner>'
             });
             var linking = apiUrl+'mobilechangessid';
             $.ajax({
@@ -642,7 +642,7 @@ $ionicHistory.nextViewOptions({
         };
         $scope.mobilechangekey = function(key) {
             $ionicLoading.show({
-                template: '<ion-spinner icon="android">'+translations.changingkey+'</ion-spinner>'
+                template: '<ion-spinner icon="android" class="spinner-energized">'+translations.changingkey+'</ion-spinner>'
             });
             var linking = apiUrl+'mobilechangekey';
             $.ajax({
@@ -879,7 +879,7 @@ $ionicHistory.nextViewOptions({
         $scope.curlang = $translate.use($localStorage.lang);
         $translate(['status', 'recurring', 'show_details']).then(function(translations) {
             $ionicLoading.show({
-                template: '<ion-spinner icon="android"></ion-spinner>'
+                template: '<ion-spinner icon="android" class="spinner-energized"></ion-spinner>'
             });
 
             var token = $localStorage.token;
@@ -927,7 +927,7 @@ $ionicHistory.nextViewOptions({
     $translate(['number', 'recurring', 'orderdate', 'orderid', 'status', 'addonname', 'cycle', 'nobar', 'partialbar', 'fullbar', 'siminfo']).then(function(translations) {
 
         $ionicLoading.show({
-            template: '<ion-spinner icon="android"></ion-spinner>'
+            template: '<ion-spinner icon="android" class="spinner-energized"></ion-spinner>'
         });
         
         //console.log(device);
@@ -1047,7 +1047,7 @@ $ionicHistory.nextViewOptions({
                 $scope.number = restu.data.number;
                 $scope.pushNotificationChange = function(data) {
                     $ionicLoading.show({
-                        template: '<ion-spinner icon="android"></ion-spinner>'
+                        template: '<ion-spinner icon="android" class="spinner-energized"></ion-spinner>'
                     });
                     var str = data.split(':');
                     var paramid = str[0];
@@ -1117,7 +1117,7 @@ $ionicHistory.nextViewOptions({
         var id = $stateParams.id;
         $scope.data = {};
         $ionicLoading.show({
-            template: '<ion-spinner icon="android"></ion-spinner>'
+            template: '<ion-spinner icon="android" class="spinner-energized"></ion-spinner>'
         });
         var date = new Date(),
             y = date.getFullYear(),
@@ -1226,7 +1226,7 @@ $ionicHistory.nextViewOptions({
         $scope.curlang = $translate.use($localStorage.lang);
         $translate(['date', 'duedate', 'paid', 'unpaid', 'status', 'invoiceno', 'download', 'reference', 'amount', 'payonline']).then(function(translations) {
             $ionicLoading.show({
-                template: '<ion-spinner icon="android"></ion-spinner>'
+                template: '<ion-spinner icon="android" class="spinner-energized"></ion-spinner>'
             });
           
             $scope.data = {};
@@ -1531,7 +1531,7 @@ $state.go('side.invoices');
             $scope.replyticket = function(tick) {
 
                 $ionicLoading.show({
-                    template: '<ion-spinner icon="android"></ion-spinner>'
+                    template: '<ion-spinner icon="android" class="spinner-energized"></ion-spinner>'
                 });
                 var linking2 = apiUrl+'replyticket';
                 $.ajax({
@@ -1556,7 +1556,7 @@ $state.go('side.invoices');
             };
             $scope.closeticket = function(id) {
                 $ionicLoading.show({
-                    template: '<ion-spinner icon="android">Closing your ticket</ion-spinner>'
+                    template: '<ion-spinner icon="android" class="spinner-energized">Closing your ticket</ion-spinner>'
                 });
                 var linking = apiUrl+'closeticket';
                 $.ajax({
@@ -1581,7 +1581,7 @@ $state.go('side.invoices');
 
 
             $ionicLoading.show({
-                template: '<ion-spinner icon="android"></ion-spinner>'
+                template: '<ion-spinner icon="android" class="spinner-energized"></ion-spinner>'
             });
 
             var link = apiUrl+'viewticket';
@@ -1827,7 +1827,7 @@ window.open(encodeURI('file:///storage/emulated/0/Download/'+filename), '_system
         $scope.curlang = $translate.use($localStorage.lang);
         $scope.block = function(reason) {
             $ionicLoading.show({
-                template: '<ion-spinner icon="android"></ion-spinner>'
+                template: '<ion-spinner icon="android" class="spinner-energized"></ion-spinner>'
             });
             var link = apiUrl+'fullbar';
             $.ajax({
@@ -1856,7 +1856,7 @@ window.open(encodeURI('file:///storage/emulated/0/Download/'+filename), '_system
         $scope.curlang = $translate.use($localStorage.lang);
         $scope.block = function(reason) {
             $ionicLoading.show({
-                template: '<ion-spinner icon="android"></ion-spinner>'
+                template: '<ion-spinner icon="android" class="spinner-energized"></ion-spinner>'
             });
             var link = apiUrl+'fullbar';
             $.ajax({
@@ -1957,7 +1957,7 @@ window.open(encodeURI('file:///storage/emulated/0/Download/'+filename), '_system
 };
         $translate(['recurring', 'status', 'show_details']).then(function(translations) {
             $ionicLoading.show({
-                template: '<ion-spinner icon="android"></ion-spinner>'
+                template: '<ion-spinner icon="android" class="spinner-energized"></ion-spinner>'
             });
             var link = apiUrl+'getpendingorder';
             $.ajax({
@@ -2060,7 +2060,7 @@ window.open(encodeURI('file:///storage/emulated/0/Download/'+filename), '_system
         $scope.curlang = $translate.use($localStorage.lang);
         $scope.block = function(reason) {
             $ionicLoading.show({
-                template: '<ion-spinner icon="android"></ion-spinner>'
+                template: '<ion-spinner icon="android" class="spinner-energized"></ion-spinner>'
             });
             var link = apiUrl+'fullbar';
             $.ajax({
@@ -2133,7 +2133,7 @@ window.open(encodeURI('file:///storage/emulated/0/Download/'+filename), '_system
 	var userid = $localStorage.userid;
 	    $scope.pushNotificationChange = function(data) {
 			  $ionicLoading.show({
-      template: '<ion-spinner icon="lines"  class="spinner-balanced"></ion-spinner>'
+      template: '<ion-spinner icon="lines"  class="spinner-energized"></ion-spinner>'
     });
 			var str = data.split(':');	
 		if(str[1] == 'true'){
@@ -2167,7 +2167,7 @@ window.open(encodeURI('file:///storage/emulated/0/Download/'+filename), '_system
                 
 	$scope.saveclient = function(cc) {
 		 $ionicLoading.show({
-        template: '<ion-spinner icon="android"></ion-spinner>'
+        template: '<ion-spinner icon="android" class="spinner-energized"></ion-spinner>'
     });
 	
 
@@ -2229,7 +2229,7 @@ window.open(encodeURI('file:///storage/emulated/0/Download/'+filename), '_system
 
     var link = apiUrl+"getdetail";
     $ionicLoading.show({
-        template: '<ion-spinner icon="lines"  class="spinner-balanced"></ion-spinner>'
+        template: '<ion-spinner icon="lines"  class="spinner-energized"></ion-spinner>'
     });
     $.ajax({
         type: "POST",

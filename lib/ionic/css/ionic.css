@@ -7489,7 +7489,7 @@ ion-slides {
  */
 .spinner {
   stroke: #444;
-  fill: #444; }
+  }
   .spinner svg {
     width: 28px;
     height: 28px; }
@@ -7512,8 +7512,8 @@ ion-slides {
     stroke: #ef473a;
     fill: #ef473a; }
   .spinner.spinner-energized {
-    stroke: #ffc900;
-    fill: #ffc900; }
+    stroke: #f6891f;
+     }
   .spinner.spinner-royal {
     stroke: #886aea;
     fill: #886aea; }
