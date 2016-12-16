@@ -125,11 +125,11 @@ var translations_fr = {
 		"error101":"Votre nouveau mot de passe et la confirmation ne correspondent pas",
 		"error102":"Votre code d'acces n\'est pas correcte. Veuillez vérifier votre boîte mail et/ou spam",
 		"yourbalance":"Portefeuille",
-		"paymentmethod": "Paymentmethod",
-		"sisowmc": "Bankcontact",
-		"sisowcc": "Credit Card",
+		"paymentmethod": "Méthode de Paiement",
+		"sisowmc": "Bancontact",
+		"sisowcc": "Carte Crédit",
 		"paypal": "Paypal",
-		"directdebit": "Directdebit SEPA",
-		"einvoice": "eInvoice",
-		"nationalnumber": "National Number"
+		"directdebit": "Domiciliation SEPA",
+		"einvoice": "Facture électronique",
+		"nationalnumber": "N° de Régistre National"
 }
