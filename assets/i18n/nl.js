@@ -125,11 +125,11 @@ var translations_nl = {
 		"error101":"Uw nieuwe paswoord en de bevestiging stemmen niet overeen",
 		"error102":"Uw toegangscode is niet correct.  Controleer a.u.b. uw mail en/of junkmail",
 		"yourbalance":"Portefeuille",
-		"paymentmethod": "Paymentmethod",
-		"sisowmc": "Bankcontact",
-		"sisowcc": "Credit Card",
+		"paymentmethod": "Betalingswijze",
+		"sisowmc": "Bancontact",
+		"sisowcc": "Kredietkaart",
 		"paypal": "Paypal",
-		"directdebit": "Directdebit SEPA",
-		"einvoice": "eInvoice",
-		"nationalnumber": "National Number"
+		"directdebit": "Domiciliëring SEPA",
+		"einvoice": "Electronische Factuur",
+		"nationalnumber": "Rijksregisternummer"
 }
