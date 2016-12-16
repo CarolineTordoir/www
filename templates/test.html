@@ -8,8 +8,15 @@
 	<div class="list">
    <label class="item item-input item-stacked-label">
    <span class="input-label">Postcode</span>
-   <input ng-model="user.postcode" type="text" placeholder="3700">
-   </label>
+   <angucomplete id="members"
+              placeholder="Search members"
+              pause="400"
+              selectedobject="name"
+              url="https://api.billi.be/xdsl/getcityme/"
+              datafield=""
+              titlefield="code,name"
+              inputclass="form-control form-control-small"/>
+</label>
 
    <label class="item item-input item-stacked-label">
    <span class="input-label">City</span>

@@ -2085,25 +2085,10 @@ window.open(encodeURI('file:///storage/emulated/0/Download/'+filename), '_system
         };
     })
 	
-.controller('TestCtrl', function($scope, $http, apiUrl, $state, $ionicLoading, $localStorage, $translate) {
+.controller('TestCtrl', function($scope, $http, apiUrl, Serv, $state, $ionicLoading, $localStorage, $translate) {
    $scope.curlang = $translate.use($localStorage.lang);
-   $http.get('https://api.billi.be/xdsl/getcityv1')
-       .then(function(res){
-          $scope.city = res.data;                
-        });
 
-  $scope.getcities = function(){
-    return $scope.city;
-  }
-
-  $scope.doSomething = function(typedthings){
-    console.log("Do something like reload data with this: " + typedthings );
-    $scope.newmovies = MovieRetriever.getmovies(typedthings);
-    $scope.newmovies.then(function(data){
-      $scope.movies = data;
-    });
-  }
-  
+    
 	var token = $localStorage.token;
 	var userid = $localStorage.userid;
 	
